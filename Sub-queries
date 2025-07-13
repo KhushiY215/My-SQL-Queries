@@ -1,0 +1,24 @@
+Find team with highest average rating
+Task
+Find the team(s) with the highest average rating among all teams and the corresponding number of users in that team.
+You can refer to the dataset here.
+Print the team_name , Count of users in that team as user_count & highest rating ( rounded to 2 decimal places ) as highest avg_rating
+
+Expected Output Format
+team_name
+user_count
+highest_avg_rating
+
+ans.->
+SELECT T.name AS team_name, COUNT(U.user_name) AS user_count, ROUND(AVG(U.rating),2) AS highest_avg_rating
+FROM Teams T
+JOIN Users U ON T.team_id = U.team_id
+GROUP BY T.team_id, T.name
+HAVING AVG(U.rating) = (
+    SELECT MAX(avg_rating)
+    FROM (
+        SELECT AVG(rating) AS avg_rating
+        FROM Users
+        GROUP BY team_id
+    ) AS subquery
+);
