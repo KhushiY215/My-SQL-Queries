@@ -39,3 +39,30 @@ Ans.->
 select cs.complaint_id,cs.status, uc.subcategory_id from complaint_status cs
 inner join user_complaints uc on cs.complaint_id=uc.complaint_id
 where cs.status=="resolved" or cs.status=="legal action taken";
+
+
+SQL JOINs Cab Complaints Report
+You are a customer support representative for the ABC Cab-booking App, which has been facing some user complaints related to rides.
+The company provided you with a dataset containing user complaints.
+
+Task
+Generate a report that lists all complaints, including those with missing user information.
+
+To accomplish this, you need to join the "user_information" and "user_complaints" tables using a LEFT JOIN and use INNER JOIN for the remaining tables.
+Sort by complaint_id.
+You can refer to the dataset here.
+Expected Output Format
+complaint_id
+full_name
+email
+category_name
+reason
+
+Ans.->
+select uc.complaint_id, ui.full_name,ui.email,cc.category_name,cd.reason
+from user_complaints uc 
+inner join complaint_category cc on cc.category_id=uc.category_id
+inner join category_description cd on uc.subcategory_id=cd.subcategory_id
+left join user_information ui on uc.user_id=ui.user_id
+order by uc.complaint_id;
+
