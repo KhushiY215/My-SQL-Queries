@@ -19,3 +19,23 @@ select uc.complaint_id, ui.user_id, ui.full_name, cc.category_name from user_com
 inner join complaint_category cc on uc.category_id = cc.category_id
 inner join user_information ui on ui.user_id=uc.user_id
 where ui.user_id==10115;
+
+
+Analyze Resolved Cab Complaints SQL
+As a data analyst for ABC Cab-booking App, you are tasked with analyzing all the complaints with status as 'resolved' or 'legal action taken'.
+You have been provided with two tables: complaint_status and user_complaints.
+This analysis will enable you to gain insights into the resolution outcomes and legal actions taken in response to user complaints.
+Your findings will contribute to enhancing the overall customer experience and improving the efficiency of complaint management within the ABC Cab-booking App.
+
+Task
+Use INNER JOIN.
+You can refer to the dataset here.
+Expected Output Format
+complaint_id
+status
+subcategory_id
+
+Ans.->
+select cs.complaint_id,cs.status, uc.subcategory_id from complaint_status cs
+inner join user_complaints uc on cs.complaint_id=uc.complaint_id
+where cs.status=="resolved" or cs.status=="legal action taken";
